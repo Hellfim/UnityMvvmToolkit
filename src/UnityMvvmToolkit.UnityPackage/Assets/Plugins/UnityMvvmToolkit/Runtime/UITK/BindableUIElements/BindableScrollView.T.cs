@@ -13,10 +13,17 @@ using UnityMvvmToolkit.UITK.Extensions;
 
 namespace UnityMvvmToolkit.UITK.BindableUIElements
 {
+    [UxmlElement]
     public abstract partial class BindableScrollView<TItemBindingContext> : 
         ScrollView, IBindableCollection, IInitializable, IDisposable 
         where TItemBindingContext : ICollectionItem
     {
+        [UxmlAttribute("binding-items-source-path")]
+        public string BindingItemsSourcePath { get; private set; }
+        
+        [UxmlAttribute("item-template")]
+        public VisualTreeAsset ItemTemplate { get; private set; }
+        
         private int _itemsCount;
 
         private VisualTreeAsset _itemTemplate;

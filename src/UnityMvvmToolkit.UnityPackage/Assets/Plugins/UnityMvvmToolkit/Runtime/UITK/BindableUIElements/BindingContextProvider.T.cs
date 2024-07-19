@@ -10,9 +10,13 @@ using UnityMvvmToolkit.UITK.Extensions;
 
 namespace UnityMvvmToolkit.UITK.BindableUIElements
 {
+    [UxmlElement]
     public abstract partial class BindingContextProvider<TBindingContext> : VisualElement, IBindableElement,
         IBindingContextProvider, IInitializable, IDisposable where TBindingContext : IBindingContext
     {
+        [UxmlAttribute("binding-context-path")]
+        public string BindingContextPath { get; protected set; }
+        
         private IObjectProvider _objectProvider;
         private List<IBindableElement> _bindableElements;
 

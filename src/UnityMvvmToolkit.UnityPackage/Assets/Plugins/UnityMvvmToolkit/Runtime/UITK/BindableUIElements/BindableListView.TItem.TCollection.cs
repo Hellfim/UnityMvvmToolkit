@@ -11,11 +11,18 @@ using UnityMvvmToolkit.UITK.Extensions;
 
 namespace UnityMvvmToolkit.UITK.BindableUIElements
 {
+    [UxmlElement]
     public abstract partial class BindableListView<TItemBindingContext, TCollection> : 
         ListView, IBindableCollection, IInitializable, IDisposable
         where TItemBindingContext : ICollectionItem
         where TCollection : IList<TItemBindingContext>, IList, INotifyCollectionChanged
     {
+        [UxmlAttribute("binding-items-source-path")]
+        public string BindingItemsSourcePath { get; private set; }
+        
+        [UxmlAttribute("item-template")]
+        public VisualTreeAsset ItemTemplate { get; private set; }
+        
         private VisualTreeAsset _itemTemplate;
 
         private IObjectProvider _objectProvider;

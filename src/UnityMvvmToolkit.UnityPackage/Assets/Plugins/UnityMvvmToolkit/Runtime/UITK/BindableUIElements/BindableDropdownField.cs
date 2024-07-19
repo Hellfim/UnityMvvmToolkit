@@ -12,8 +12,15 @@ using UnityMvvmToolkit.Core.Interfaces;
 
 namespace UnityMvvmToolkit.UITK.BindableUIElements
 {
+    [UxmlElement]
     public partial class BindableDropdownField : DropdownField, IBindableCollection, IInitializable, IDisposable
     {
+        [UxmlAttribute("binding-items-source-path")]
+        public string BindingItemsSourcePath { get; private set; }
+
+        [UxmlAttribute("binding-selected-item-path")]
+        public string BindingSelectedItemPath { get; private set; }
+        
         private IProperty<string> _selectedItemProperty;
         private PropertyBindingData _selectedItemBindingData;
 

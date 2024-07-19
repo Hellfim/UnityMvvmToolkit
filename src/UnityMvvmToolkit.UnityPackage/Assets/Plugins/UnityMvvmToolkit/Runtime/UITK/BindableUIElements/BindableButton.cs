@@ -1,12 +1,17 @@
 ﻿using System.Runtime.CompilerServices;
+using UnityEngine.UIElements;
 using UnityMvvmToolkit.Core;
 using UnityMvvmToolkit.Core.Extensions;
 using UnityMvvmToolkit.Core.Interfaces;
 
 namespace UnityMvvmToolkit.UITK.BindableUIElements
 {
+    [UxmlElement]
     public partial class BindableButton : BaseButton, IBindableElement
     {
+        [UxmlAttribute("command")]
+        public string Command { get; private set; }
+        
         private int? _buttonId;
 
         private IBaseCommand _command;

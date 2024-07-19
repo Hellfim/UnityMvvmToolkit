@@ -6,8 +6,12 @@ using UnityMvvmToolkit.Core.Interfaces;
 
 namespace UnityMvvmToolkit.UITK.BindableUIElements
 {
+    [UxmlElement]
     public partial class BindableLabel : Label, IBindableElement
     {
+        [UxmlAttribute("binding-text-path")]
+        public string BindingTextPath { get; private set; }
+        
         private IReadOnlyProperty<string> _textProperty;
         private PropertyBindingData _propertyBindingData;
 

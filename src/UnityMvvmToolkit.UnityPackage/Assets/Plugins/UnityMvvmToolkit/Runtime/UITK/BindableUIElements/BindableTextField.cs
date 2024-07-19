@@ -7,8 +7,12 @@ using UnityMvvmToolkit.Core.Interfaces;
 
 namespace UnityMvvmToolkit.UITK.BindableUIElements
 {
+    [UxmlElement]
     public partial class BindableTextField : TextField, IBindableElement
     {
+        [UxmlAttribute("binding-value-path")]
+        public string BindingValuePath { get; private set; }
+        
         private PropertyBindingData _propertyBindingData;
 
         private IProperty<string> _valueProperty;
