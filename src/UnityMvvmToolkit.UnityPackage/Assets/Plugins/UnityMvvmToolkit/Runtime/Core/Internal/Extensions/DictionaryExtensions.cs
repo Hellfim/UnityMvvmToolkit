@@ -2,9 +2,9 @@
 
 namespace UnityMvvmToolkit.Core.Internal.Extensions
 {
-    internal static class ImmutableDictionary
+    public static class ImmutableDictionary
     {
-        internal static IReadOnlyDictionary<TKey, TValue> Empty<TKey, TValue>()
+        public static IReadOnlyDictionary<TKey, TValue> Empty<TKey, TValue>()
         {
             return EmptyDictionary<TKey, TValue>.Value;
         }
