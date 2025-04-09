@@ -39,7 +39,7 @@ namespace UnityMvvmToolkit.Core
             _bindingContextHandler = new BindingContextHandler(new BindingContextMemberProvider());
 
             _collectionItemTemplates =
-                collectionItemTemplates == null
+                collectionItemTemplates == null || collectionItemTemplates == ImmutableDictionary.Empty<Type, object>()
                     ? bindingContextObjectProvider._collectionItemTemplates
                     : bindingContextObjectProvider._collectionItemTemplates == ImmutableDictionary.Empty<Type, object>()
                         ? collectionItemTemplates
