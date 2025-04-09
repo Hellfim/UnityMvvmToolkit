@@ -30,6 +30,24 @@ namespace UnityMvvmToolkit.Core
             _collectionItemTemplates = collectionItemTemplates ?? ImmutableDictionary.Empty<Type, object>();
         }
 
+        public BindingContextObjectProvider(BindingContextObjectProvider bindingContextObjectProvider,
+            IValueConverter[] converters,
+            IReadOnlyDictionary<Type, object> collectionItemTemplates = null)
+        {
+            _valueConverterHandler = new ValueConverterHandler(bindingContextObjectProvider._valueConverterHandler, converters);
+            _objectWrapperHandler = new ObjectWrapperHandler(_valueConverterHandler);
+            _bindingContextHandler = new BindingContextHandler(new BindingContextMemberProvider());
+
+            _collectionItemTemplates =
+                collectionItemTemplates == null
+                    ? bindingContextObjectProvider._collectionItemTemplates
+                    : bindingContextObjectProvider._collectionItemTemplates == ImmutableDictionary.Empty<Type, object>()
+                        ? collectionItemTemplates
+                        : bindingContextObjectProvider._collectionItemTemplates
+                            .Union(collectionItemTemplates)
+                            .ToDictionary(pair => pair.Key, pair => pair.Value);
+        }
+
         public IObjectProvider WarmupAssemblyViewModels()
         {
             return WarmupAssemblyViewModels(Assembly.GetCallingAssembly());

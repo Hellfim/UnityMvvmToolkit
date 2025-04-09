@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityMvvmToolkit.Core.Converters.ParameterValueConverters;
@@ -14,6 +15,13 @@ namespace UnityMvvmToolkit.Core.Internal.ObjectHandlers
         public ValueConverterHandler(IValueConverter[] valueConverters)
         {
             _valueConvertersByHash = new Dictionary<int, IValueConverter>();
+
+            RegisterValueConverters(valueConverters);
+        }
+
+		public ValueConverterHandler(ValueConverterHandler valueConverterHandler, IValueConverter[] valueConverters)
+        {
+            _valueConvertersByHash = valueConverterHandler._valueConvertersByHash.ToDictionary(pair => pair.Key, pair => pair.Value);
 
             RegisterValueConverters(valueConverters);
         }
