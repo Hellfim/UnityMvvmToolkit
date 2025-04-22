@@ -80,8 +80,8 @@ namespace UnityMvvmToolkit.Core.Internal.ObjectHandlers
                     throw new ArgumentOutOfRangeException();
             }
 
-            _valueConvertersByHash.Add(converterTypeHash, valueConverter);
-            _valueConvertersByHash.Add(converterHashByName, valueConverter);
+            _valueConvertersByHash.TryAdd(converterTypeHash, valueConverter);
+            _valueConvertersByHash.TryAdd(converterHashByName, valueConverter);
             _valueConvertersByHash.TryAdd(converterHashByType, valueConverter);
         }
     }
