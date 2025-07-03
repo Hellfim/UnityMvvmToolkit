@@ -21,9 +21,10 @@ namespace UnityMvvmToolkit.Core.Internal.ObjectHandlers
 
 		public ValueConverterHandler(ValueConverterHandler valueConverterHandler, IValueConverter[] valueConverters)
         {
-            _valueConvertersByHash = valueConverterHandler._valueConvertersByHash.ToDictionary(pair => pair.Key, pair => pair.Value);
+            _valueConvertersByHash = new Dictionary<int, IValueConverter>();
 
             RegisterValueConverters(valueConverters);
+            RegisterValueConverters(valueConverterHandler._valueConvertersByHash.Select(pair => pair.Value).ToArray());
         }
 
         public bool TryGetValueConverterById(int converterId, out IValueConverter valueConverter)
