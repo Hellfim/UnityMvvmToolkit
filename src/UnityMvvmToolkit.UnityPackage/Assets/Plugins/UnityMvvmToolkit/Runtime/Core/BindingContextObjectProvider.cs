@@ -207,6 +207,16 @@ namespace UnityMvvmToolkit.Core
             throw new NullReferenceException($"Item template for '{typeof(TKey)}' not found.");
         }
 
+        public String GetCollectionItemTemplate<TKey>(TKey key)
+        {
+            if (_collectionItemTemplates.TryGetValue(key.GetType(), out var itemTemplate))
+            {
+                return (String) itemTemplate;
+            }
+
+            throw new NullReferenceException($"Item template for '{typeof(TKey)}' not found.");
+        }
+
         public void Dispose()
         {
             _objectWrapperHandler.Dispose();

@@ -33,5 +33,6 @@ namespace UnityMvvmToolkit.Core.Interfaces
         void ReturnCommandWrapper(IBaseCommand command, CommandBindingData bindingData);
 
         TValue GetCollectionItemTemplate<TKey, TValue>();
+        String GetCollectionItemTemplate<TKey>(TKey key);
     }
 }
