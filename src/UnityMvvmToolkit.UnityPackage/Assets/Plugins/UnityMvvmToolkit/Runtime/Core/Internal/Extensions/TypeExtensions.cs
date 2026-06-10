@@ -19,17 +19,29 @@ namespace UnityMvvmToolkit.Core.Internal.Extensions
             }
 
             flags |= BindingFlags.DeclaredOnly;
-            
+
             var currentType = type;
             var members = new List<MemberInfo>();
             do
             {
-                members.AddRange(currentType.GetMembers(flags));
+                members.AddRange(currentType.GetMembers(flags).Where(m => !IsAbstractMember(m)));
                 currentType = currentType.BaseType;
             }
             while (currentType != null);
 
             return members.ToArray();
+        }
+
+        private static bool IsAbstractMember(MemberInfo member)
+        {
+            return member switch
+            {
+                MethodInfo method => method.IsAbstract,
+                PropertyInfo property => property.GetMethod?.IsAbstract == true || property.SetMethod?.IsAbstract == true,
+                EventInfo @event => @event.AddMethod?.IsAbstract == true || @event.RemoveMethod?.IsAbstract == true,
+                Type type => type.IsAbstract,
+                _ => false
+            };
         }
     }
 }
